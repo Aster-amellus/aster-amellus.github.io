@@ -1409,7 +1409,7 @@ pre code {
     transition: all 0.2s ease-in-out;
   }
   .links-of-author a::before {
-    background: #ffff0e;
+    background: #ffdadb;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2878,11 +2878,15 @@ header.header {
   }
 }
 body {
-    background-image: url("/image/こがね色の小惑星.jpg"); /* 你的壁纸图片路径 */
-    background-repeat: no-repeat;       /* 背景不重复 */
-    background-attachment: fixed;       /* 背景图片固定，不随滚动条滚动 */
-    background-position: center center; /* 图片居中显示 */
-    background-size: cover;           /* 图片覆盖整个背景区域 */
+        /* 依次尝试：NFD 文件名 -> NFC 文件名 -> GIF 兜底 */
+        background-image:
+            url("/image/こがね色の小惑星.jpg"),
+            url("/image/こがね色の小惑星.jpg"),
+            url("/image/mikage.gif");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
 }
 
 /* 可选：为了内容可读性，给主要内容区域添加一个半透明背景板 */
