@@ -158,7 +158,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -198,6 +198,241 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://aster-amellus.github.io/2025/09/23/LLM-Quick-Look/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/image/mikage.gif">
+      <meta itemprop="name" content="Aster">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aster's Blog">
+      <meta itemprop="description" content="Welcome to Aster's Blog, a place to share thoughts and ideas.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Aster's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/09/23/LLM-Quick-Look/" class="post-title-link" itemprop="url">LLM Quick Look</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-09-23 21:51:38" itemprop="dateCreated datePublished" datetime="2025-09-23T21:51:38+08:00">2025-09-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><em>Speech And Language Processing</em> ch7笔记</p>
+<hr>
+<h2 id="1-核心理论：将语言建模为概率分布">1. 核心理论：将语言建模为概率分布</h2>
+<p>大型语言模型（LLM）的根本目标是构建一个精确的、可计算的<strong>通用语言概率分布模型</strong>。它不仅仅是预测下一个词，而是试图理解和复现人类语言中蕴含的无穷的语法、语义、语用和世界知识。</p>
+<h3 id="1-1-数学基石：概率链式法则">1.1. 数学基石：概率链式法则</h3>
+<p>语言模型的核心是<strong>概率链式法则（Chain Rule of Probability）</strong>。它将一个复杂序列的联合概率 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>w</mi><mn>2</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>w</mi><mi>m</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(w_1, w_2, ..., w_m)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 分解为一系列在计算上可行的、局部的条件概率的乘积。</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>W</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>m</mi></munderover><mi>P</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>w</mi><mrow><mo>&lt;</mo><mi>i</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(W) = \prod_{i=1}^{m} P(w_i | w_{&lt;i})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.929066em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6513970000000002em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∏</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mrel mtight">&lt;</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.17737em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>这个分解是革命性的，因为它将一个无法直接建模的、高维度的联合分布问题，转化为了一个<strong>序列化的预测任务</strong>。LLM的本质就是一个强大的函数近似器，通过深度神经网络学习来精确地计算 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>w</mi><mrow><mo>&lt;</mo><mi>i</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(w_i | w_{&lt;i})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mrel mtight">&lt;</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.17737em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>。</p>
+<h3 id="1-2-自回归生成：一个计算性的反馈循环">1.2. 自回归生成：一个计算性的反馈循环</h3>
+<p>自回归（Autoregressive）生成是一个动态过程，其中模型的输出在下一步会成为其输入的一部分。</p>
+<ul>
+<li><strong>信息流</strong>：<code>Context_t</code> -&gt; <code>Model</code> -&gt; <code>P(w | Context_t)</code> -&gt; <code>Sample(w_t)</code> -&gt; <code>Context_&#123;t+1&#125; = Context_t + w_t</code></li>
+<li><strong>计算视角</strong>：这个过程可以看作是在一个巨大的、由所有可能文本构成的图（Graph of Language）中进行路径搜索。每一步采样都是在当前节点选择一条通往下一个节点的边，而模型的概率分布则是选择每条边的权重。不同的采样策略（贪心、Top-p等）相当于不同的路径搜索启发式算法。</li>
+</ul>
+<hr>
+<h2 id="2-核心架构：Transformer的深度剖析">2. 核心架构：Transformer的深度剖析</h2>
+<p>现代LLM的性能飞跃归功于<strong>Transformer架构</strong>，其核心是<strong>自注意力机制（Self-Attention）</strong>。</p>
+<h3 id="2-1-解码器架构（Decoder-only）-GPT系列">2.1. 解码器架构（Decoder-only）- GPT系列</h3>
+<p>这是当前生成式LLM的主流。其关键在于<strong>带掩码的多头自注意力（Masked Multi-Head Self-Attention）</strong>。</p>
+<ul>
+<li><strong>工作流详解</strong>：
+<ol>
+<li><strong>输入嵌入</strong>：输入序列的每个token被转换为一个高维向量（Embedding）。</li>
+<li><strong>位置编码</strong>：由于注意力机制本身不感知顺序，一个位置向量被加到每个token的嵌入上，以注入序列的位置信息。</li>
+<li><strong>Transformer块（重复N次）</strong>：
+a. <strong>掩码自注意力</strong>：对于序列中的每个token，它会计算一个“注意力分数”，来决定对序列中<strong>包括自身在内的所有先前token</strong>的关注程度。这里的<strong>掩码</strong>是一个上三角矩阵，其值为负无穷大。在Softmax操作后，未来token的注意力分数会变为0，从而确保模型在预测位置 <code>t</code> 时，无法“看到” <code>t+1</code>, <code>t+2</code>, … 的信息。这就是**因果性（Causality）**的实现。
+b. <strong>残差连接 &amp; 层归一化 (Add &amp; Norm)</strong>：将自注意力的输出与其输入相加（残差连接），然后进行层归一化。这有助于缓解梯度消失问题，稳定并加速训练。
+c. <strong>前馈神经网络 (FFN)</strong>：一个简单的两层全连接网络，对每个位置的表示进行非线性变换，增加模型的表示能力。
+d. <strong>再次 Add &amp; Norm</strong>。</li>
+<li><strong>输出</strong>：最后一个Transformer块的输出经过一个线性层和Softmax函数，映射到整个词汇表的概率分布上。</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-2-编码器架构（Encoder-only）-BERT系列">2.2. 编码器架构（Encoder-only）- BERT系列</h3>
+<p>编码器的核心是<strong>双向自注意力</strong>，它旨在生成深度上下文感知的<strong>词表示（Embeddings）</strong>。</p>
+<ul>
+<li><strong>训练目标 - 掩码语言模型 (MLM)</strong>：
+<ul>
+<li><strong>输入</strong>: <code>The quick [MASK] fox jumps over the [MASK] dog.</code></li>
+<li><strong>目标</strong>: 预测 <code>[MASK]</code> 处的词是 <code>brown</code> 和 <code>lazy</code>。</li>
+<li><strong>意义</strong>: 为了正确预测 <code>brown</code>，模型必须同时理解 <code>quick</code> 和 <code>fox</code>。这种双向依赖性迫使模型学习深度的语境关系，使其生成的词嵌入非常适合下游的**自然语言理解（NLU）**任务。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-编码器-解码器架构-T5-BART">2.3. 编码器-解码器架构 - T5, BART</h3>
+<p>这种架构通过**交叉注意力（Cross-Attention）**机制将两部分连接起来。</p>
+<ul>
+<li><strong>交叉注意力详解</strong>：在解码器的每个Transformer块中，除了掩码自注意力层外，还有一个交叉注意力层。
+<ul>
+<li><strong>Query (Q)</strong>: 来自<strong>解码器</strong>自身的、代表当前生成状态的向量。</li>
+<li><strong>Key (K) &amp; Value (V)</strong>: 来自<strong>编码器</strong>处理完整个输入序列后的<strong>最终输出向量</strong>。</li>
+<li><strong>过程</strong>: 解码器在生成每个新词时，都会用它的Query去“查询”编码器输出的所有信息（Keys），并根据相关性（注意力分数）提取最相关的信息（Values）。这允许解码器在生成的每一步都能“回顾”输入序列的全部内容，对于翻译和摘要等任务至关重要。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="3-高级交互：提示工程的内在机理">3. 高级交互：提示工程的内在机理</h2>
+<h3 id="3-1-上下文学习（In-context-Learning）的本质">3.1. 上下文学习（In-context Learning）的本质</h3>
+<p>ICL并非传统意义上的学习（即权重更新），而是一种<strong>推理时（Inference-time）的模式匹配和元学习（Meta-learning）</strong>。</p>
+<ul>
+<li><strong>注意力视角</strong>：当模型处理一个包含少样本示例的提示时，其注意力机制会将新问题与示例问题进行模式匹配。示例中的“输入-输出”格式和逻辑关系，会引导模型在处理新问题时激活相似的神经元通路和计算模式。</li>
+<li><strong>元学习视角</strong>：可以认为，LLM在海量的预训练数据中，已经见过了无数种“任务”的文本描述（例如，维基百科中的问答对、代码网站的函数和文档、翻译网站的平行语料）。ICL正是利用了模型在预训练阶段学到的这种“学习如何学习”的元能力。提示中的示例，为模型选择和应用哪种已有的“技能”提供了强有力的线索。</li>
+</ul>
+<h3 id="3-2-思维链（Chain-of-Thought-CoT）的认知科学解释">3.2. 思维链（Chain-of-Thought, CoT）的认知科学解释</h3>
+<p>CoT的成功可以类比于人类的<strong>系统2思维（System 2 Thinking）</strong>。</p>
+<ul>
+<li><strong>系统1 vs. 系统2</strong>：
+<ul>
+<li><strong>系统1（直觉）</strong>: 快速、自动、不费力的思考。标准提示下的LLM回答类似于系统1，直接给出一个直觉性的答案。</li>
+<li><strong>系统2（推理）</strong>: 缓慢、有条理、需要耗费精力的逻辑推理。</li>
+</ul>
+</li>
+<li><strong>CoT的作用</strong>：CoT提示强制模型进入“系统2”模式。通过要求模型输出中间推理步骤，它将一个复杂的、多步的推理任务分解成了一系列简单的、单步的预测任务。这不仅为模型提供了“认知草稿纸”，也使得每一步的计算都更加聚焦和准确，从而显著降低了最终答案出错的概率。</li>
+<li><strong>进阶技术 - 自我一致性（Self-Consistency）</strong>：这是CoT的增强版。让模型使用CoT生成<strong>多个</strong>不同的推理路径，然后对最终答案进行“投票”。如果多个不同的推理过程都指向同一个答案，那么这个答案正确的可能性就大大增加了。</li>
+</ul>
+<hr>
+<h2 id="4-核心算法：采样策略的概率论与权衡">4. 核心算法：采样策略的概率论与权衡</h2>
+<h3 id="4-1-温度（Temperature）与分布熵">4.1. 温度（Temperature）与分布熵</h3>
+<p>温度τ直接影响模型输出概率分布的<strong>熵（Entropy）</strong>，熵是衡量系统不确定性或随机性的度量。</p>
+<ul>
+<li><strong>低 τ (&lt; 1)</strong>: 降低了分布的熵。模型对其最高概率的预测变得“过度自信”，输出更具确定性，但也更保守、缺乏创造力。</li>
+<li><strong>高 τ (&gt; 1)</strong>: 增加了分布的熵。模型变得“不那么自信”，愿意考虑更多可能性，输出更具多样性和随机性，但也有可能产生更多不相关的胡言乱语。</li>
+</ul>
+<h3 id="4-2-Top-p-Nucleus-采样的优势">4.2. Top-p (Nucleus) 采样的优势</h3>
+<p>Top-p采样因其<strong>动态适应性</strong>而被广泛认为是优于Top-k的策略。</p>
+<ul>
+<li><strong>场景对比</strong>:
+<ul>
+<li><strong>上下文</strong>: <code>The capital of France is [MASK].</code>
+<ul>
+<li><strong>模型预测</strong>: 概率分布非常<strong>尖锐</strong> (low entropy)。<code>Paris</code> 的概率可能高达99%。</li>
+<li><strong>Top-p (p=0.95)</strong>: 候选核（nucleus）可能只包含 <code>&#123;&quot;Paris&quot;&#125;</code>。</li>
+<li><strong>Top-k (k=50)</strong>: 仍然会保留50个候选词，其中49个是极低概率的噪声。</li>
+</ul>
+</li>
+<li><strong>上下文</strong>: <code>I went to the store and bought a [MASK].</code>
+<ul>
+<li><strong>模型预测</strong>: 概率分布非常<strong>平坦</strong> (high entropy)。<code>gallon</code>, <code>carton</code>, <code>bunch</code>, <code>bottle</code> 等词的概率可能都很接近。</li>
+<li><strong>Top-p (p=0.95)</strong>: 候选核会<strong>自动扩大</strong>，包含所有这些合理的选项。</li>
+<li><strong>Top-k (k=3)</strong>: 可能会过早地截断，漏掉一些同样合理的选项。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-束搜索（Beam-Search）的计算细节">4.3. 束搜索（Beam Search）的计算细节</h3>
+<p>Beam Search在每一步都保留<code>b</code>个最可能的<strong>候选序列（hypotheses）</strong>。</p>
+<ul>
+<li><strong>对数概率</strong>: 在实践中，为了避免浮点数下溢（多个小于1的概率相乘会变得极小）和提高计算效率，所有计算都在<strong>对数空间</strong>完成。序列的概率等于其各部分对数概率之和：<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>w</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>t</mi></munderover><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>w</mi><mrow><mo>&lt;</mo><mi>i</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\log P(w_1, ..., w_t) = \sum_{i=1}^{t} \log P(w_i | w_{&lt;i})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.05823em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.7805610000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mrel mtight">&lt;</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.17737em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+</li>
+<li><strong>主要缺陷 - 生成重复和无趣的文本</strong>: Beam Search倾向于选择局部最优的高概率词。在开放式生成中，这常常导致模型陷入重复循环（如 &quot;I think I think I think…&quot;）或选择最“安全”、最平庸的词汇，因为这些词在训练语料中统计上最常见。</li>
+</ul>
+<hr>
+<h2 id="5-训练LLM：从统计学习到行为对齐">5. 训练LLM：从统计学习到行为对齐</h2>
+<h3 id="5-1-预训练：构建语言的基础模型">5.1. 预训练：构建语言的基础模型</h3>
+<p>这是一个巨大的<strong>表征学习（Representation Learning）<strong>过程。模型不仅在学习语言，还在其参数中隐式地编码了海量关于世界的事实、常识和推理模式。这就是为什么它们被称为</strong>基础模型（Foundation Models）</strong>。</p>
+<h3 id="5-2-SFT：行为克隆与格式遵循">5.2. SFT：行为克隆与格式遵循</h3>
+<p>SFT的本质是<strong>行为克隆（Behavior Cloning）</strong>。它教会模型如何模仿“有用助手”的对话格式。例如，学习如何回答问题而不是续写问题，如何遵循指令，以及如何使用Markdown、代码块等格式。它塑造了模型的<strong>外在行为模式</strong>。</p>
+<h3 id="5-3-对齐：塑造模型的内在价值观">5.3. 对齐：塑造模型的内在价值观</h3>
+<p>对齐解决的是SFT无法解决的深层问题：什么是“好”的回答？“好”是模糊的，取决于上下文、安全性和人类偏好。</p>
+<ul>
+<li>
+<p><strong>RLHF的精髓</strong>：</p>
+<ol>
+<li><strong>学习人类偏好</strong>: 奖励模型（RM）是RLHF的核心。它将模糊的、不可直接优化的“人类偏好”转化为了一个可计算的、可优化的<strong>奖励信号</strong>。</li>
+<li><strong>在策略空间中搜索</strong>: 原始的LLM定义了一个巨大的<strong>策略空间</strong>（即所有可能的回答方式）。强化学习算法（如PPO）则是在这个空间中进行<strong>探索（Exploration）</strong>，寻找能够最大化奖励信号（即最符合人类偏好）的策略。</li>
+<li><strong>PPO的作用</strong>: **近端策略优化（Proximal Policy Optimization, PPO）**在RLHF中至关重要。它通过一个KL散度惩罚项，确保更新后的模型（策略）不会与原始SFT模型偏离太远。这既能防止模型为了追求高奖励而“胡言乱语”（<strong>奖励黑客, Reward Hacking</strong>），也能防止模型忘记在预训练和SFT阶段学到的语言能力（<strong>灾难性遗忘, Catastrophic Forgetting</strong>）。</li>
+</ol>
+</li>
+<li>
+<p><strong>前沿技术 - 直接偏好优化 (DPO) &amp; Constitutional AI</strong>:</p>
+<ul>
+<li><strong>DPO</strong>: 一种更简单、更稳定的对齐方法，它绕过了训练奖励模型这一步，直接使用偏好数据（哪个回答更好）来微调LLM。</li>
+<li><strong>Constitutional AI (Anthropic)</strong>: 一种减少对人类标注依赖的对齐方法。模型被要求遵循一个明确的“宪法”（一系列原则，如“选择最无害的回答”）。模型首先自我批判和修正其回答以符合宪法，然后基于这些修正后的回答来微调自己。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-评估LLM：超越单一指标的整体视图">6. 评估LLM：超越单一指标的整体视图</h2>
+<h3 id="6-1-评估哲学：内在-vs-外在">6.1. 评估哲学：内在 vs. 外在</h3>
+<ul>
+<li><strong>内在评估（Intrinsic Evaluation）</strong>: 衡量模型自身的语言能力，不关心具体任务。<strong>困惑度</strong>是典型的内在评估。</li>
+<li><strong>外在评估（Extrinsic Evaluation）</strong>: 衡量模型在特定下游任务上的表现。所有<strong>基准测试</strong>（MMLU, HumanEval等）都是外在评估。
+一个现代的、全面的LLM评估体系必须两者兼顾。</li>
+</ul>
+<h3 id="6-2-基准测试的挑战与未来">6.2. 基准测试的挑战与未来</h3>
+<ul>
+<li><strong>饱和与过拟合</strong>: 许多知名基准测试（如SQuAD）已经“饱和”，即模型的表现已经超过了人类平均水平。这引发了对模型是否真正“理解”还是仅仅“过拟合”了测试集模式的担忧。</li>
+<li><strong>动态与对抗性评估</strong>: 未来的评估趋势是动态和对抗性的。例如，<strong>HELM (Holistic Evaluation of Language Models)</strong> 试图在一个涵盖数十种任务和指标的、标准化的框架下评估模型。<strong>Dynabench</strong>平台则允许人类与模型持续互动，动态地寻找模型会犯错的新案例，并将其加入评估集，从而创建一个不断演进、永不饱和的基准。</li>
+</ul>
+<hr>
+<h2 id="7-伦理与安全：技术与责任的交汇点">7. 伦理与安全：技术与责任的交汇点</h2>
+<h3 id="7-1-幻觉的根源与RAG的机制">7.1. 幻觉的根源与RAG的机制</h3>
+<ul>
+<li><strong>根源</strong>: 幻觉是模型**参数化知识（Parametric Knowledge）**的固有缺陷。模型试图将其在训练数据中见过的无数事实压缩并存储在其有限的参数中。这个过程是有损的，当需要回忆或组合这些知识时，就容易出错。</li>
+<li><strong>RAG的原理 - 从参数化知识到来源知识</strong>: RAG通过引入**非参数化知识（Non-parametric Knowledge）**来解决这个问题。
+<ol>
+<li><strong>检索器（Retriever）</strong>: 这是一个信息检索系统。它将用户问题编码为一个向量，然后在知识库（也被编码为向量）中进行高效的相似性搜索，找出最相关的文本片段。</li>
+<li><strong>生成器（Generator）</strong>: 即LLM。它接收原始问题<strong>和</strong>检索到的文本片段作为增强的上下文，然后基于这些有来源依据的信息来生成答案。
+RAG将模型的角色从一个“无所不知的专家”转变为一个“聪明的图书管理员”，它知道去哪里查找信息，并能很好地总结和呈现。</li>
+</ol>
+</li>
+</ul>
+<h3 id="7-2-偏见与对齐的深层挑战">7.2. 偏见与对齐的深层挑战</h3>
+<p>对齐不仅仅是技术问题，也是**价值规范（Normative）**问题。为模型定义“无害”、“有用”等标准时，我们实际上是在将特定文化、特定人群的价值观编码到AI系统中。这引发了深刻的哲学问题：谁来决定这些价值观？如何确保其公平性和普适性？<strong>Constitutional AI</strong>正是对这一挑战的一种技术回应，试图使这个价值注入过程更加透明和可控。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
