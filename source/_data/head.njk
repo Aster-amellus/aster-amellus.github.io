@@ -1,0 +1,13 @@
+{% if theme.markov and theme.markov.api_base %}
+<script>
+  window.MARKOV_API_BASE = '{{ theme.markov.api_base | escape }}';
+</script>
+{% endif %}
+{% set head_root = config.root or '/' %}
+{% if head_root == '' %}
+  {% set head_root = '/' %}
+{% endif %}
+{% if head_root | last != '/' %}
+  {% set head_root = head_root + '/' %}
+{% endif %}
+<link rel="stylesheet" href="{{ head_root }}css/custom.css">
