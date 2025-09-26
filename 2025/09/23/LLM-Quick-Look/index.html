@@ -29,13 +29,11 @@
 <meta property="og:description" content="Speech And Language Processing ch7笔记  1. 核心理论：将语言建模为概率分布 大型语言模型（LLM）的根本目标是构建一个精确的、可计算的通用语言概率分布模型。它不仅仅是预测下一个词，而是试图理解和复现人类语言中蕴含的无穷的语法、语义、语用和世界知识。 1.1. 数学基石：概率链式法则 语言模型的核心是概率链式法则（Chain Rule of Probabilit">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-09-23T13:51:38.000Z">
-<meta property="article:modified_time" content="2025-09-23T13:53:36.475Z">
+<meta property="article:modified_time" content="2025-09-26T04:44:33.052Z">
 <meta property="article:author" content="Aster">
-<meta property="article:tag" content="Aster">
-<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="大语言模型">
 <meta property="article:tag" content="LLM">
-<meta property="article:tag" content="AI">
-<meta property="article:tag" content="Web3">
+<meta property="article:tag" content="简介">
 <meta name="twitter:card" content="summary">
 
 
@@ -83,9 +81,19 @@
 
 
 
+<script>
+  window.MARKOV_API_BASE = 'http://localhost:8000';
+</script>
+
+
+
+
+<link rel="stylesheet" href="/css/custom.css">
+
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
+<link rel="alternate" href="/atom.xml" title="Aster's Blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
@@ -121,7 +129,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-search"><a href="/search-advanced/" rel="section"><i class="fa fa-search fa-fw"></i>搜索</a></li><li class="menu-item menu-item-wordcloud"><a href="/wordcloud/" rel="section"><i class="fa fa-cloud fa-fw"></i>词云</a></li><li class="menu-item menu-item-markov"><a href="/markov/" rel="section"><i class="fa fa-magic fa-fw"></i>markov</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
   </ul>
 </nav>
 
@@ -133,7 +141,9 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+  <div class="sidebar-background-blur-effect"></div>
+
+  <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -145,9 +155,9 @@
 
       <div class="sidebar-panel-container">
         <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E7%90%86%E8%AE%BA%EF%BC%9A%E5%B0%86%E8%AF%AD%E8%A8%80%E5%BB%BA%E6%A8%A1%E4%B8%BA%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83"><span class="nav-number">1.</span> <span class="nav-text">1. 核心理论：将语言建模为概率分布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%9F%B3%EF%BC%9A%E6%A6%82%E7%8E%87%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. 数学基石：概率链式法则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E8%87%AA%E5%9B%9E%E5%BD%92%E7%94%9F%E6%88%90%EF%BC%9A%E4%B8%80%E4%B8%AA%E8%AE%A1%E7%AE%97%E6%80%A7%E7%9A%84%E5%8F%8D%E9%A6%88%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. 自回归生成：一个计算性的反馈循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%EF%BC%9ATransformer%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%89%96%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">2. 核心架构：Transformer的深度剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%A7%A3%E7%A0%81%E5%99%A8%E6%9E%B6%E6%9E%84%EF%BC%88Decoder-only%EF%BC%89-GPT%E7%B3%BB%E5%88%97"><span class="nav-number">2.1.</span> <span class="nav-text">2.1. 解码器架构（Decoder-only）- GPT系列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E7%BC%96%E7%A0%81%E5%99%A8%E6%9E%B6%E6%9E%84%EF%BC%88Encoder-only%EF%BC%89-BERT%E7%B3%BB%E5%88%97"><span class="nav-number">2.2.</span> <span class="nav-text">2.2. 编码器架构（Encoder-only）- BERT系列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E7%BC%96%E7%A0%81%E5%99%A8-%E8%A7%A3%E7%A0%81%E5%99%A8%E6%9E%B6%E6%9E%84-T5-BART"><span class="nav-number">2.3.</span> <span class="nav-text">2.3. 编码器-解码器架构 - T5, BART</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%AB%98%E7%BA%A7%E4%BA%A4%E4%BA%92%EF%BC%9A%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%86%85%E5%9C%A8%E6%9C%BA%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">3. 高级交互：提示工程的内在机理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%88In-context-Learning%EF%BC%89%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="nav-number">3.1.</span> <span class="nav-text">3.1. 上下文学习（In-context Learning）的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%80%9D%E7%BB%B4%E9%93%BE%EF%BC%88Chain-of-Thought-CoT%EF%BC%89%E7%9A%84%E8%AE%A4%E7%9F%A5%E7%A7%91%E5%AD%A6%E8%A7%A3%E9%87%8A"><span class="nav-number">3.2.</span> <span class="nav-text">3.2. 思维链（Chain-of-Thought, CoT）的认知科学解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%A0%B8%E5%BF%83%E7%AE%97%E6%B3%95%EF%BC%9A%E9%87%87%E6%A0%B7%E7%AD%96%E7%95%A5%E7%9A%84%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%9D%83%E8%A1%A1"><span class="nav-number">4.</span> <span class="nav-text">4. 核心算法：采样策略的概率论与权衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%B8%A9%E5%BA%A6%EF%BC%88Temperature%EF%BC%89%E4%B8%8E%E5%88%86%E5%B8%83%E7%86%B5"><span class="nav-number">4.1.</span> <span class="nav-text">4.1. 温度（Temperature）与分布熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Top-p-Nucleus-%E9%87%87%E6%A0%B7%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">4.2.</span> <span class="nav-text">4.2. Top-p (Nucleus) 采样的优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E6%9D%9F%E6%90%9C%E7%B4%A2%EF%BC%88Beam-Search%EF%BC%89%E7%9A%84%E8%AE%A1%E7%AE%97%E7%BB%86%E8%8A%82"><span class="nav-number">4.3.</span> <span class="nav-text">4.3. 束搜索（Beam Search）的计算细节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%AE%AD%E7%BB%83LLM%EF%BC%9A%E4%BB%8E%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B9%A0%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%AF%B9%E9%BD%90"><span class="nav-number">5.</span> <span class="nav-text">5. 训练LLM：从统计学习到行为对齐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%9A%E6%9E%84%E5%BB%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">5.1.</span> <span class="nav-text">5.1. 预训练：构建语言的基础模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-SFT%EF%BC%9A%E8%A1%8C%E4%B8%BA%E5%85%8B%E9%9A%86%E4%B8%8E%E6%A0%BC%E5%BC%8F%E9%81%B5%E5%BE%AA"><span class="nav-number">5.2.</span> <span class="nav-text">5.2. SFT：行为克隆与格式遵循</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E5%AF%B9%E9%BD%90%EF%BC%9A%E5%A1%91%E9%80%A0%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%86%85%E5%9C%A8%E4%BB%B7%E5%80%BC%E8%A7%82"><span class="nav-number">5.3.</span> <span class="nav-text">5.3. 对齐：塑造模型的内在价值观</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%AF%84%E4%BC%B0LLM%EF%BC%9A%E8%B6%85%E8%B6%8A%E5%8D%95%E4%B8%80%E6%8C%87%E6%A0%87%E7%9A%84%E6%95%B4%E4%BD%93%E8%A7%86%E5%9B%BE"><span class="nav-number">6.</span> <span class="nav-text">6. 评估LLM：超越单一指标的整体视图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E8%AF%84%E4%BC%B0%E5%93%B2%E5%AD%A6%EF%BC%9A%E5%86%85%E5%9C%A8-vs-%E5%A4%96%E5%9C%A8"><span class="nav-number">6.1.</span> <span class="nav-text">6.1. 评估哲学：内在 vs. 外在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95%E7%9A%84%E6%8C%91%E6%88%98%E4%B8%8E%E6%9C%AA%E6%9D%A5"><span class="nav-number">6.2.</span> <span class="nav-text">6.2. 基准测试的挑战与未来</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E4%BC%A6%E7%90%86%E4%B8%8E%E5%AE%89%E5%85%A8%EF%BC%9A%E6%8A%80%E6%9C%AF%E4%B8%8E%E8%B4%A3%E4%BB%BB%E7%9A%84%E4%BA%A4%E6%B1%87%E7%82%B9"><span class="nav-number">7.</span> <span class="nav-text">7. 伦理与安全：技术与责任的交汇点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E5%B9%BB%E8%A7%89%E7%9A%84%E6%A0%B9%E6%BA%90%E4%B8%8ERAG%E7%9A%84%E6%9C%BA%E5%88%B6"><span class="nav-number">7.1.</span> <span class="nav-text">7.1. 幻觉的根源与RAG的机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E5%81%8F%E8%A7%81%E4%B8%8E%E5%AF%B9%E9%BD%90%E7%9A%84%E6%B7%B1%E5%B1%82%E6%8C%91%E6%88%98"><span class="nav-number">7.2.</span> <span class="nav-text">7.2. 偏见与对齐的深层挑战</span></a></li></ol></li></ol></div>
-        </div>
+          </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
@@ -161,23 +171,28 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">标签</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/aster-amellus" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aster-amellus" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i></a>
       </span>
       <span class="links-of-author-item">
         <a href="/qfwfq.qwq@gmail.com" title="E-Mail → qfwfq.qwq@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i></a>
@@ -189,6 +204,54 @@
   <div class="cc-license animated" itemprop="license">
     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
   </div>
+
+<div class="sidebar-background-blur-effect"></div>
+
+<div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+		<img class="site-author-image" itemprop="image" alt="Aster"
+			src="/image/mikage.gif">
+	<p class="site-author-name" itemprop="name">Aster</p>
+	<div class="site-description" itemprop="description">Welcome to Aster's Blog, a place to share thoughts and ideas.</div>
+</div>
+<div class="site-state-wrap animated">
+	<nav class="site-state">
+			<div class="site-state-item site-state-posts">
+				<a href="/archives/">
+					<span class="site-state-item-count">2</span>
+					<span class="site-state-item-name">日志</span>
+				</a>
+			</div>
+			<div class="site-state-item site-state-categories">
+					<a href="/categories/">
+				<span class="site-state-item-count">1</span>
+				<span class="site-state-item-name">分类</span></a>
+			</div>
+			<div class="site-state-item site-state-tags">
+					<a href="/tags/">
+				<span class="site-state-item-count">6</span>
+				<span class="site-state-item-name">标签</span></a>
+			</div>
+	</nav>
+</div>
+	<div class="links-of-author animated">
+			<span class="links-of-author-item">
+				<a href="https://github.com/aster-amellus" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;aster-amellus" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+			</span>
+			<span class="links-of-author-item">
+				<a href="/atom.xml" title="RSS → &#x2F;atom.xml" rel="noopener me"><i class="fa fa-rss fa-fw"></i></a>
+			</span>
+			<span class="links-of-author-item">
+				<a href="/qfwfq.qwq@gmail.com" title="E-Mail → qfwfq.qwq@gmail.com" rel="noopener me"><i class="fa fa-envelope fa-fw"></i></a>
+			</span>
+			<span class="links-of-author-item">
+				<a href="https://x.com/A4ter_" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;A4ter_" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+			</span>
+	</div>
+	<div class="cc-license animated" itemprop="license">
+		<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+	</div>
+
+
 
         </div>
       </div>
@@ -242,8 +305,32 @@
 
       <time title="创建时间：2025-09-23 21:51:38" itemprop="dateCreated datePublished" datetime="2025-09-23T21:51:38+08:00">2025-09-23</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+        </span>
+    </span>
 
   
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
 </div>
 
         </div>
@@ -364,7 +451,7 @@ d. <strong>再次 Add &amp; Norm</strong>。</li>
 <li><strong>对数概率</strong>: 在实践中，为了避免浮点数下溢（多个小于1的概率相乘会变得极小）和提高计算效率，所有计算都在<strong>对数空间</strong>完成。序列的概率等于其各部分对数概率之和：<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mn>1</mn></msub><mo separator="true">,</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><msub><mi>w</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>t</mi></munderover><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><msub><mi>w</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><msub><mi>w</mi><mrow><mo>&lt;</mo><mi>i</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\log P(w_1, ..., w_t) = \sum_{i=1}^{t} \log P(w_i | w_{&lt;i})
 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">.</span><span class="mord">.</span><span class="mord">.</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.05823em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.7805610000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mrel mtight">&lt;</span><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.17737em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
 </li>
-<li><strong>主要缺陷 - 生成重复和无趣的文本</strong>: Beam Search倾向于选择局部最优的高概率词。在开放式生成中，这常常导致模型陷入重复循环（如 &quot;I think I think I think…&quot;）或选择最“安全”、最平庸的词汇，因为这些词在训练语料中统计上最常见。</li>
+<li><strong>主要缺陷 - 生成重复和无趣的文本</strong>: Beam Search倾向于选择局部最优的高概率词。在开放式生成中，这常常导致模型陷入重复循环（如 “I think I think I think…”）或选择最“安全”、最平庸的词汇，因为这些词在训练语料中统计上最常见。</li>
 </ul>
 <hr>
 <h2 id="5-训练LLM：从统计学习到行为对齐">5. 训练LLM：从统计学习到行为对齐</h2>
@@ -444,13 +531,18 @@ RAG将模型的角色从一个“无所不知的专家”转变为一个“聪�
 </ul>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/" rel="tag"># 大语言模型</a>
+              <a href="/tags/LLM/" rel="tag"># LLM</a>
+              <a href="/tags/%E7%AE%80%E4%BB%8B/" rel="tag"># 简介</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/05/28/math-test/" rel="prev" title="数学公式测试">
-                  <i class="fa fa-angle-left"></i> 数学公式测试
+                <a href="/2025/05/21/Introduction-to-zk-SNARKs/" rel="prev" title="Introduction to zk-SNARKs">
+                  <i class="fa fa-angle-left"></i> Introduction to zk-SNARKs
                 </a>
             </div>
             <div class="post-nav-item">
@@ -479,6 +571,20 @@ RAG将模型的角色从一个“无所不知的专家”转变为一个“聪�
     </span>
     <span class="author" itemprop="copyrightHolder">Aster</span>
   </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">21k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">19 分钟</span>
+  </span>
+</div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
