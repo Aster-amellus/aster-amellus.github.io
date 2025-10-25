@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-10-25T14:10:14.663Z",
+  "generated_at": "2025-10-25T14:14:10.961Z",
   "total_words": 1779,
   "words": [
     {
@@ -39,15 +39,15 @@
       "count": 34
     },
     {
+      "text": "lt",
+      "count": 31
+    },
+    {
       "text": "秘密",
       "count": 31
     },
     {
       "text": "设置",
-      "count": 31
-    },
-    {
-      "text": "lt",
       "count": 31
     },
     {
@@ -75,11 +75,7 @@
       "count": 25
     },
     {
-      "text": "概率",
-      "count": 24
-    },
-    {
-      "text": "参数",
+      "text": "复合",
       "count": 24
     },
     {
@@ -87,7 +83,11 @@
       "count": 24
     },
     {
-      "text": "复合",
+      "text": "概率",
+      "count": 24
+    },
+    {
+      "text": "参数",
       "count": 24
     },
     {
@@ -111,15 +111,15 @@
       "count": 23
     },
     {
-      "text": "过程",
-      "count": 22
-    },
-    {
-      "text": "可信",
+      "text": "态射",
       "count": 22
     },
     {
       "text": "函数",
+      "count": 22
+    },
+    {
+      "text": "过程",
       "count": 22
     }
   ]
