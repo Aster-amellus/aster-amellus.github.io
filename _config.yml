@@ -5,7 +5,7 @@
 # Site
 title: Aster's Blog
 subtitle: 'A Personal Blog by Aster'
-description: "Welcome to Aster's Blog, a place to share thoughts and ideas."
+description: "Per aspera ad astra"
 keywords: ['Aster', 'Blog', 'LLM', 'AI', 'Web3']
 author: Aster
 language: zh-CN
@@ -157,5 +157,5 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy: 
   type: 'git'
-  repo: https://github.com/aster-amellus/aster-amellus.github.io.git
+  repo: git@github.com:aster-amellus/aster-amellus.github.io.git
   branch: main

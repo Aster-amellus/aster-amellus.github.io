@@ -3,6 +3,160 @@
   window.MARKOV_API_BASE = '{{ theme.markov.api_base | escape }}';
 </script>
 {% endif %}
+<script>
+  (() => {
+    const STORAGE_KEY = 'aster-theme';
+    const THEME_COLORS = {
+      light: '#f3f0ea',
+      dark: '#11161c'
+    };
+
+    const readStoredTheme = () => {
+      try {
+        return localStorage.getItem(STORAGE_KEY);
+      } catch {
+        return null;
+      }
+    };
+
+    const writeStoredTheme = value => {
+      try {
+        localStorage.setItem(STORAGE_KEY, value);
+      } catch {}
+    };
+
+    const normalizeTheme = value => {
+      if (value === 'dark') return 'dark';
+      if (value === 'light' || value === 'normal') return 'light';
+      return null;
+    };
+
+    const systemTheme = () => (
+      window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    );
+
+    const updateThemeColor = theme => {
+      let meta = document.querySelector('meta[name="theme-color"][data-aster-theme]');
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.name = 'theme-color';
+        meta.setAttribute('data-aster-theme', '');
+        document.head.appendChild(meta);
+      }
+      meta.content = THEME_COLORS[theme];
+    };
+
+    const applyTheme = theme => {
+      const resolvedTheme = theme === 'dark' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', resolvedTheme);
+      document.documentElement.style.colorScheme = resolvedTheme;
+      updateThemeColor(resolvedTheme);
+      return resolvedTheme;
+    };
+
+    const initialTheme = normalizeTheme(readStoredTheme()) || systemTheme();
+    applyTheme(initialTheme);
+
+    window.AsterTheme = {
+      get() {
+        return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      },
+      set(theme) {
+        const resolvedTheme = applyTheme(theme);
+        writeStoredTheme(resolvedTheme);
+        window.dispatchEvent(new CustomEvent('aster-theme-change', {
+          detail: { theme: resolvedTheme }
+        }));
+      },
+      toggle() {
+        this.set(this.get() === 'dark' ? 'light' : 'dark');
+      }
+    };
+
+    const mediaQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    const syncWithSystem = event => {
+      if (!normalizeTheme(readStoredTheme())) {
+        const resolvedTheme = applyTheme(event.matches ? 'dark' : 'light');
+        window.dispatchEvent(new CustomEvent('aster-theme-change', {
+          detail: { theme: resolvedTheme }
+        }));
+      }
+    };
+
+    if (mediaQuery) {
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener('change', syncWithSystem);
+      } else if (mediaQuery.addListener) {
+        mediaQuery.addListener(syncWithSystem);
+      }
+    }
+  })();
+
+  (() => {
+    const AVATAR_URL = '{{ theme.avatar.url }}?v=20260419e';
+    const HOME_URL = '/';
+    const AVATAR_ALT = '{{ config.author | escape }}';
+    const labelForTarget = theme => theme === 'dark' ? 'Dark' : 'Light';
+    const titleForTarget = theme => theme === 'dark' ? 'Switch to dark mode' : 'Switch to light mode';
+
+    const renderHeaderAvatar = () => {
+      const host = document.querySelector('.site-nav-right');
+      if (!host) return;
+
+      let avatar = host.querySelector('.header-avatar');
+      if (!avatar) {
+        avatar = document.createElement('a');
+        avatar.className = 'header-avatar';
+        avatar.href = HOME_URL;
+        avatar.title = AVATAR_ALT;
+        avatar.setAttribute('aria-label', AVATAR_ALT);
+        avatar.innerHTML = `<img src="${AVATAR_URL}" alt="${AVATAR_ALT}">`;
+      }
+
+      const themeButton = host.querySelector('.theme-switcher');
+      if (themeButton) {
+        host.insertBefore(avatar, themeButton);
+      } else if (!avatar.parentNode) {
+        host.appendChild(avatar);
+      }
+    };
+
+    const renderThemeButton = () => {
+      const host = document.querySelector('.site-nav-right') || document.querySelector('.site-brand-container');
+      if (!host) return;
+
+      let button = host.querySelector('.theme-switcher');
+      if (!button) {
+        button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'theme-switcher';
+        button.innerHTML = '<span class="theme-switcher-dot" aria-hidden="true"></span><span class="theme-switcher-label"></span>';
+        button.addEventListener('click', () => {
+          if (window.AsterTheme) window.AsterTheme.toggle();
+        });
+        host.appendChild(button);
+      }
+
+      const currentTheme = window.AsterTheme ? window.AsterTheme.get() : 'light';
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      const label = labelForTarget(nextTheme);
+      const title = titleForTarget(nextTheme);
+      const labelNode = button.querySelector('.theme-switcher-label');
+      if (labelNode) labelNode.textContent = label;
+      button.setAttribute('title', title);
+      button.setAttribute('aria-label', title);
+    };
+
+    const renderHeaderControls = () => {
+      renderThemeButton();
+      renderHeaderAvatar();
+    };
+
+    document.addEventListener('DOMContentLoaded', renderHeaderControls);
+    document.addEventListener('pjax:success', renderHeaderControls);
+    window.addEventListener('aster-theme-change', renderThemeButton);
+  })();
+</script>
 {% set head_root = config.root or '/' %}
 {% if head_root == '' %}
   {% set head_root = '/' %}
@@ -10,4 +164,4 @@
 {% if head_root | last != '/' %}
   {% set head_root = head_root + '/' %}
 {% endif %}
-<link rel="stylesheet" href="{{ head_root }}css/custom.css">
+<link rel="stylesheet" href="{{ head_root }}css/custom.css?v=20260419e">

@@ -42,8 +42,8 @@ markov:
 
 # Schemes
 #scheme: Muse
-#scheme: Mist
-scheme: Pisces
+scheme: Mist
+#scheme: Pisces
 #scheme: Gemini
 
 # Dark Mode
@@ -78,7 +78,7 @@ creative_commons:
   license: by-nc-sa
   # Available values: big | small
   size: small
-  sidebar: true
+  sidebar: false
   post: true
   # You can set a language value if you prefer a translated version of CC license, e.g. deed.zh
   # CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org
@@ -118,7 +118,7 @@ menu:
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
-  icons: true
+  icons: false
   badges: false
 
 
@@ -131,13 +131,13 @@ sidebar:
   # Sidebar position. Available values: left | right
   position: left
   post: true
-  page: true
-  archive: true
-  category: true
-  tag: true
+  page: false
+  archive: false
+  category: false
+  tag: false
   # Sidebar width.
   # Applicable to Muse | Mist and mobile of Pisces | Gemini.
-  width_expanded: 320
+  width_expanded: 228
   # Applicable to desktop of Pisces | Gemini.
   width_dual_column: 240
 
@@ -153,18 +153,18 @@ sidebar:
   # Sidebar padding in pixels.
   padding: 18
   # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
-  offset: 12
+  offset: 24
 
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: /image/mikage.gif
+  url: /image/mikage.png
   # If true, the avatar will be displayed in circle.
-  rounded: false # 是否圆形头像
+  rounded: true # 是否圆形头像
   rotated: false # 鼠标悬停时是否旋转
 
 # Posts / Categories / Tags in sidebar.
-site_state: true
+site_state: false
 
 # Social Links
 # Usage: `Key: permalink || icon`
@@ -361,16 +361,16 @@ preconnect: false
 # Set the text alignment in posts / pages.
 text_align:
   # Available values: start | end | left | right | center | justify | justify-all | match-parent
-  desktop: justify
-  mobile: justify
+  desktop: left
+  mobile: left
 
 # Reduce padding / margin indents on devices with narrow width.
 mobile_layout_economy: false
 
 # Browser header panel color.
 theme_color:
-  light: "#222"
-  dark: "#222"
+  light: "#f7edf3"
+  dark: "#231d25"
 
 # Override browsers' default behavior.
 body_scrollbar:
@@ -415,7 +415,7 @@ reading_progress:
   # Available values: top | bottom
   position: top
   reversed: false
-  color: "#37c6c0"
+  color: "#b38199"
   height: 3px
 
 # Bookmark Support
@@ -648,7 +648,7 @@ quicklink:
 # Use Animate.css to animate everything.
 # For more information: https://animate.style
 motion:
-  enable: true
+  enable: false
   async: false
   duration: 200
   transition:

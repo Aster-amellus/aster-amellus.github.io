@@ -22,6 +22,8 @@ mathjax: true
 
 想象一下，证明者想要证明她知道一个宝箱的密码，但又不想把密码告诉验证者。零知识证明就能让她在不泄露密码本身的情况下，让验证者相信她确实知道密码。
 
+<!-- more -->
+
 一个有效的零知识证明系统必须满足三个核心属性 ：
 
 1. **完整性 (Completeness)**: 如果证明者确实知道秘密（即声明为真），并且证明者和验证者都诚实地遵循协议，那么验证者最终一定会被说服。换句话说，真实的证明总能通过验证。[Interactive zero knowledge 3-colorability demonstration](https://zkshanghai.xyz/interactive/graph.html)
@@ -93,7 +95,7 @@ Fiat-Shamir启发式方法是将交互式证明转为非交互式的重要技术
 ### 1.3 zk-S N A R Ks
 
 理解了零知识证明的基本概念后，我们再来看 zk-SNARK 这个具体的零知识证明技术。它的全称是 “Zero-Knowledge Succinct Non-interactive ARgument of Knowledge” 。每一个字母都代表着一项至关重要的特性，这些特性共同造就了 zk-SNARKs 的强大威力与实用性。
-| 字母  | 英文全称 | 中文全称 | 解释 |
+| 字母  | 英文 | 中文 | 解释 |
 |---|---|---|---|
 | ZK | Zero-Knowledge | 零知识 | 证明者在不泄露任何秘密信息的前提下，让验证者相信某个论断为真。 |
 | S | Succinct | 简洁 | 证明的体积很小，验证过程非常快速，通常与原始计算的复杂度无关。 |
