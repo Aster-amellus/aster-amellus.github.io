@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-19T05:53:44.179Z",
-  "total_words": 1779,
+  "generated_at": "2026-06-17T07:36:10.670Z",
+  "total_words": 2155,
   "words": [
     {
       "text": "证明",
@@ -11,8 +11,24 @@
       "count": 104
     },
     {
+      "text": "gt",
+      "count": 98
+    },
+    {
+      "text": "lt",
+      "count": 92
+    },
+    {
+      "text": "quot",
+      "count": 84
+    },
+    {
+      "text": "toy",
+      "count": 66
+    },
+    {
       "text": "计算",
-      "count": 58
+      "count": 59
     },
     {
       "text": "模型",
@@ -23,31 +39,43 @@
       "count": 46
     },
     {
-      "text": "gt",
-      "count": 39
+      "text": "123",
+      "count": 44
+    },
+    {
+      "text": "125",
+      "count": 42
+    },
+    {
+      "text": "生成",
+      "count": 41
     },
     {
       "text": "多项式",
       "count": 38
     },
     {
-      "text": "生成",
-      "count": 35
+      "text": "mlir",
+      "count": 38
+    },
+    {
+      "text": "x27",
+      "count": 37
+    },
+    {
+      "text": "ast",
+      "count": 37
     },
     {
       "text": "系统",
-      "count": 34
-    },
-    {
-      "text": "lt",
-      "count": 31
-    },
-    {
-      "text": "秘密",
-      "count": 31
+      "count": 35
     },
     {
       "text": "设置",
+      "count": 35
+    },
+    {
+      "text": "秘密",
       "count": 31
     },
     {
@@ -55,11 +83,23 @@
       "count": 29
     },
     {
+      "text": "核心",
+      "count": 29
+    },
+    {
       "text": "这些",
+      "count": 29
+    },
+    {
+      "text": "ch1",
+      "count": 29
+    },
+    {
+      "text": "examples",
       "count": 28
     },
     {
-      "text": "核心",
+      "text": "类型",
       "count": 27
     },
     {
@@ -67,60 +107,20 @@
       "count": 27
     },
     {
+      "text": "test",
+      "count": 27
+    },
+    {
       "text": "知识",
       "count": 26
     },
     {
-      "text": "问题",
-      "count": 25
-    },
-    {
-      "text": "复合",
-      "count": 24
+      "text": "参数",
+      "count": 26
     },
     {
       "text": "中的",
-      "count": 24
-    },
-    {
-      "text": "概率",
-      "count": 24
-    },
-    {
-      "text": "参数",
-      "count": 24
-    },
-    {
-      "text": "pcp",
-      "count": 23
-    },
-    {
-      "text": "g1",
-      "count": 23
-    },
-    {
-      "text": "g2",
-      "count": 23
-    },
-    {
-      "text": "输入",
-      "count": 23
-    },
-    {
-      "text": "进行",
-      "count": 23
-    },
-    {
-      "text": "态射",
-      "count": 22
-    },
-    {
-      "text": "函数",
-      "count": 22
-    },
-    {
-      "text": "过程",
-      "count": 22
+      "count": 25
     }
   ]
 }
